@@ -1,5 +1,5 @@
 # Just a simple data volume container using phusion baseimage
-# 
+#
 FROM phusion/baseimage:latest
 
 # Set correct environment variables.
@@ -13,5 +13,7 @@ RUN /etc/my_init.d/00_regen_ssh_host_keys.sh
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
+RUN mkdir -p /var/lib/mysql
+VOLUME /var/lib/mysql
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
